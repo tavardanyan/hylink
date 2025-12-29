@@ -1,0 +1,147 @@
+{
+  "info": {
+    "name": "Microservices API Collection",
+    "description": "API endpoints for Storage and Notification microservices",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Storage Service",
+      "item": [
+        {
+          "name": "Create Data - Database Storage",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Database Test\",\n  \"description\": \"Testing database storage with push notification\",\n  \"storageType\": \"database\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["data"]
+            },
+            "description": "Creates a new record in the database. This triggers a push notification to be sent."
+          }
+        },
+        {
+          "name": "Create Data - File Storage",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "File Storage Test",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Testing file storage with email notification",
+                  "type": "text"
+                },
+                {
+                  "key": "storageType",
+                  "value": "file",
+                  "type": "text"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3001/data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["data"]
+            },
+            "description": "Creates a new record and stores the file. This triggers an email notification to be sent."
+          }
+        },
+        {
+          "name": "Get All Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["data"]
+            },
+            "description": "Retrieves all stored data records"
+          }
+        },
+        {
+          "name": "Get Data by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/data/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["data", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "your-record-id-here"
+                }
+              ]
+            },
+            "description": "Retrieves a specific data record by ID"
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001"
+            },
+            "description": "Check if the Storage Service is running"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notification Service",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002"
+            },
+            "description": "Check if the Notification Service is running"
+          }
+        }
+      ]
+    }
+  ]
+}
